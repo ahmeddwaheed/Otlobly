@@ -1,9 +1,9 @@
 module Api
-	module v1
+	module V1
 		class RestaurantsController < ApplicationController
 			def index 
-				restaurants = Restaurant.findAll()
-				render json :{status: 'SUCCESS', message: 'Loaded Restaurants', data: restaurants}
+				restaurants = Restaurant.order(:name)
+				render json: {status: 'SUCCESS', message: 'Loaded Restaurants', data: restaurants}, status: :ok
 			end
 		end
 	end
