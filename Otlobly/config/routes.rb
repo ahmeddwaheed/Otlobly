@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   		resources :restaurants
   	end
   end
+ post 'authenticate', to: 'authentication#authenticate'
+
 end
