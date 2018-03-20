@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   	namespace 'v1' do
   		resources :restaurants
   		resources :menus
-		get 'mymenus/:id' => "restaurants#menus"
+  		resources :items
+		  get 'mymenus/:id' => "restaurants#menus"
+		  get 'myitems/:id' => "menus#items"
   	end
   end
  post 'authenticate', to: 'authentication#authenticate'

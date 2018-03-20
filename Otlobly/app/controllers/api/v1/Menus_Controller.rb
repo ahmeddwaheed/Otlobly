@@ -11,6 +11,11 @@ module Api
 				render json: {status: 'SUCCESS', message: 'Loaded menu', data: menu}, status: :ok
 			end
 
+			def items
+				menu = Menu.find(params[:id]).items.collect
+				render json: {status: 'SUCCESS', message: 'Loaded Menu Items', data: menu}, status: :ok
+			end
+
 			def create 
 				menu = Menu.new(menus_params)
 
