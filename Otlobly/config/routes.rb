@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   		resources :restaurants
   		resources :menus
   		resources :items
+      resources :orders
 		  get 'mymenus/:id' => "restaurants#menus"
 		  get 'myitems/:id' => "menus#items"
   	end
