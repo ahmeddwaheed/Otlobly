@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       resources :order_items
 		  get 'mymenus/:id' => "restaurants#menus"
 		  get 'myitems/:id' => "menus#items"
+      get 'mycart/:id' => "orders#viewcart"
   	end
   end
  post 'authenticate', to: 'authentication#authenticate'

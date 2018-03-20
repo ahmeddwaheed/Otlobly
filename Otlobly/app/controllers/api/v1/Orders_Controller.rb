@@ -8,36 +8,42 @@ module Api
 
 			def show 
 				order = Order.find(params[:id])
-				render json: {status: 'SUCCESS', message: 'Loaded Restaurant', data: order}, status: :ok
+				render json: {status: 'SUCCESS', message: 'Loaded Order', data: order}, status: :ok
 			end
 
-			def additem
-
+			def viewcart
+				order = Order.find(params[:id]).order_items.collect
+				items = Array.new
+				order.each do |item|
+					items.push Item.find(item.id)
+				end
+				cart = {items: items, total: Order.find(params[:id]).total}
+				render json: {status: 'SUCCESS', message: 'Loaded Order', data: cart}, status: :ok
 			end
 
 			def create 
 				order = Order.new(order_params)
 
 				if(order.save)
-					render json: {status: 'SUCCESS', message: 'Saved Restaurant', data: order}, status: :ok
+					render json: {status: 'SUCCESS', message: 'Saved Order', data: order}, status: :ok
 				else
 					render json: {status: 'ERROR', message: 'Order not saved', data: order.errors}, status: :unprocessable_entity
 				end
 			end
 
 			def destroy
-				order = Restaurant.find(params[:id])
+				order = Order.find(params[:id])
 				order.destroy
 				render json: {status: 'SUCCESS', message: 'Deleted Order', data: order}, status: :ok				
 			end
 
 			def update 
-				order = Restaurant.find(params[:id])
+				order = Order.find(params[:id])
 
 				if order.update(order_params)
 					render json: {status: 'SUCCESS', message: 'Updated Order', data: order}, status: :ok
 				else
-					render json: {status: 'ERROR', message: 'Restaurant not updated', data: order.errors}, status: :unprocessable_entity
+					render json: {status: 'ERROR', message: 'Order not updated', data: order.errors}, status: :unprocessable_entity
 				end
 			end
 
