@@ -5,20 +5,38 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
+* Ruby version: 2.3.3
 
-* System dependencies
+* Rails version: 5.1.5
 
-* Configuration
+* Api Consumtion:
 
-* Database creation
+	* /api/v1
 
-* Database initialization
+		* Authenticate user: /authenticate, POST, must give email and password as parameters
 
-* How to run the test suite
+		* View restaurant menus: /restaurant_menus, GET, must give id of restaurant as parameter
 
-* Services (job queues, cache servers, search engines, etc.)
+		* View menu items: /menu_items, GET, must give id of restaurant as parameter
 
-* Deployment instructions
+		* View all items in a restaurant per menu: /restaurant_items, GET, must give id of restaurant
 
-* ...
+		* View Cart: /cart, GET, must give id of cart as parameter
+
+		* Submit Order:, /submit_order, PUT, must give order id as parameter
+
+		* Get all areas currently being delivered, GET, /areas, 
+
+		* Get All Submitted Orders, /submitted_orders, GET
+
+		* BREAD:
+
+			* /restaurants
+			* /menus
+			* /items
+			* /orders
+			* /order_items
+
+
+
+
