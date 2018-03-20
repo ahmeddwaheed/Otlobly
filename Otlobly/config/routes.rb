@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       resources :order_items
 		  get 'restaurant_menus/:id' => "restaurants#menus"
 		  get 'menu_items/:id' => "menus#items"
+      get 'restaurant_items/:id' => "restaurants#items"
       get 'cart/:id' => "orders#viewcart"
       put 'submit_order/:id' => "orders#submit"
       get 'areas' => "orders#areas"

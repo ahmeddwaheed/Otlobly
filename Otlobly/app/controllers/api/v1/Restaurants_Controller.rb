@@ -16,6 +16,21 @@ module Api
 				render json: {status: 'SUCCESS', message: 'Loaded Restaurants Menus', data: restaurant}, status: :ok
 			end
 
+			def items
+				restaurant = Restaurant.find(params[:id]).menus.collect
+				menus = Array.new
+				restaurant_name = {name: Restaurant.find(params[:id]).name}
+				menus.push restaurant_name
+				restaurant.each do |menu|
+					params[:id] = menu.id
+					items = {title: menu.title, items: Menu.find(params[:id]).items.collect}
+					menus.push items
+				end
+				menus
+				render json: {status: 'SUCCESS', message: 'Loaded Restaurants Menus', data: menus}, status: :ok
+			end
+
+
 			def create 
 				restaurant = Restaurant.new(restaurant_params)
 
