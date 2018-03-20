@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   		resources :menus
   		resources :items
       resources :orders
+      resources :order_items
 		  get 'mymenus/:id' => "restaurants#menus"
 		  get 'myitems/:id' => "menus#items"
   	end

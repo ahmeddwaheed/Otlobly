@@ -11,9 +11,8 @@ module Api
 				render json: {status: 'SUCCESS', message: 'Loaded Restaurant', data: order}, status: :ok
 			end
 
-			def menus 
-				order = Order.find(params[:id]).menus.collect
-				render json: {status: 'SUCCESS', message: 'Loaded Orders Menus', data: order}, status: :ok
+			def additem
+
 			end
 
 			def create 
@@ -45,7 +44,7 @@ module Api
 			private
 
 			def order_params
-				params.permit(:user_id)
+				params.permit(:user_id,:order_id,:quantity,:item_id)
 			end
 		end
 	end
