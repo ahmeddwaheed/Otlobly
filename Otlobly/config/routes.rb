@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   namespace 'api' do
   	namespace 'v1' do
   		resources :restaurants
+  		resources :menus
+		get 'mymenus/:id' => "restaurants#menus"
   	end
   end
  post 'authenticate', to: 'authentication#authenticate'
