@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  area: MyText
+  total: 9.99
+  status: MyString
+  user: one
+
+two:
+  area: MyText
+  total: 9.99
+  status: MyString
+  user: two
