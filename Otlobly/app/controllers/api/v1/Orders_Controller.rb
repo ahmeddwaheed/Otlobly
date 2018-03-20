@@ -19,12 +19,17 @@ module Api
 					items.push order_item
 				end
 				cart = {items: items, total: Order.find(params[:id]).total}
-				render json: {status: 'SUCCESS', message: 'Loaded Order', data: cart}, status: :ok
+				render json: {status: 'SUCCESS', message: 'Loaded Cart', data: cart}, status: :ok
 			end
 
 			def submit
 				order_params = {status: "Confirmed"}
 				update_order(order_params)
+			end
+
+			def areas
+				orders = Order.find_by_sql("SELECT orders.area FROM orders WHERE orders.status = 'Confirmed'")
+				render json: {status: 'SUCCESS', message: 'Loaded Areas', data: orders}, status: :ok
 			end
 
 			def create 
@@ -51,7 +56,7 @@ module Api
 			private
 
 			def order_params
-				params.permit(:user_id,:order_id,:quantity,:item_id,:status)
+				params.permit(:user_id,:order_id,:quantity,:item_id,:status,:area)
 			end
 
 			def update_order(order_params)

@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 		  get 'myitems/:id' => "menus#items"
       get 'mycart/:id' => "orders#viewcart"
       put 'submitorder/:id' => "orders#submit"
+      get 'areas' => "orders#areas"
   	end
   end
  post 'authenticate', to: 'authentication#authenticate'
