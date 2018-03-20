@@ -22,6 +22,11 @@ module Api
 				render json: {status: 'SUCCESS', message: 'Loaded Order', data: cart}, status: :ok
 			end
 
+			def submit
+				order_params = {status: "Confirmed"}
+				update_order(order_params)
+			end
+
 			def create 
 				order = Order.new(order_params)
 
@@ -40,19 +45,22 @@ module Api
 
 
 			def update 
-				order = Order.find(params[:id])
-
-				if order.update(order_params)
-					render json: {status: 'SUCCESS', message: 'Updated Order', data: order}, status: :ok
-				else
-					render json: {status: 'ERROR', message: 'Order not updated', data: order.errors}, status: :unprocessable_entity
-				end
+				update_order(order_params)
 			end
 
 			private
 
 			def order_params
-				params.permit(:user_id,:order_id,:quantity,:item_id)
+				params.permit(:user_id,:order_id,:quantity,:item_id,:status)
+			end
+
+			def update_order(order_params)
+				order = Order.find(params[:id])
+				if order.update(order_params)
+					render json: {status: 'SUCCESS', message: 'Updated Order', data: order}, status: :ok
+				else
+					render json: {status: 'ERROR', message: 'Order not updated', data: order.errors}, status: :unprocessable_entity
+				end
 			end
 		end
 	end

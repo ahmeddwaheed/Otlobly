@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 		  get 'mymenus/:id' => "restaurants#menus"
 		  get 'myitems/:id' => "menus#items"
       get 'mycart/:id' => "orders#viewcart"
+      put 'submitorder/:id' => "orders#submit"
   	end
   end
  post 'authenticate', to: 'authentication#authenticate'
