@@ -7,11 +7,12 @@ Rails.application.routes.draw do
   		resources :items
       resources :orders
       resources :order_items
-		  get 'mymenus/:id' => "restaurants#menus"
-		  get 'myitems/:id' => "menus#items"
-      get 'mycart/:id' => "orders#viewcart"
-      put 'submitorder/:id' => "orders#submit"
+		  get 'restaurant_menus/:id' => "restaurants#menus"
+		  get 'menu_items/:id' => "menus#items"
+      get 'cart/:id' => "orders#viewcart"
+      put 'submit_order/:id' => "orders#submit"
       get 'areas' => "orders#areas"
+      get 'submitted_orders' => "orders#submitted_orders"
   	end
   end
  post 'authenticate', to: 'authentication#authenticate'

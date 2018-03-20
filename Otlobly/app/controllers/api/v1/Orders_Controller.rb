@@ -12,19 +12,24 @@ module Api
 			end
 
 			def viewcart
-				order = Order.find(params[:id]).order_items.collect
-				items = Array.new
-				order.each do |item|
-					order_item = {details: Item.find(item.id), quantity: item.quantity}
-					items.push order_item
-				end
-				cart = {items: items, total: Order.find(params[:id]).total}
+				cart = get_order_details(params[:id])
 				render json: {status: 'SUCCESS', message: 'Loaded Cart', data: cart}, status: :ok
 			end
 
 			def submit
 				order_params = {status: "Confirmed"}
 				update_order(order_params)
+			end
+
+			def submitted_orders
+				orders = Order.where(status: "Confirmed")
+				submitted_orders = Array.new
+				orders.each do |order|
+					params[:id] = order.id
+					submitted_orders.push(get_order_details(params[:id]))
+				end
+				render json: {status: 'SUCCESS', message: 'Loaded Submitted Orders', data: submitted_orders}, status: :ok
+
 			end
 
 			def areas
@@ -66,6 +71,16 @@ module Api
 				else
 					render json: {status: 'ERROR', message: 'Order not updated', data: order.errors}, status: :unprocessable_entity
 				end
+			end
+
+			def get_order_details(id)
+				order = Order.find(id).order_items.collect
+				items = Array.new
+				order.each do |item|
+					order_item = {details: Item.find(item.id), quantity: item.quantity}
+					items.push order_item
+				end
+				cart = {items: items, total: Order.find(params[:id]).total}
 			end
 		end
 	end
