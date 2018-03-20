@@ -15,7 +15,8 @@ module Api
 				order = Order.find(params[:id]).order_items.collect
 				items = Array.new
 				order.each do |item|
-					items.push Item.find(item.id)
+					order_item = {details: Item.find(item.id), quantity: item.quantity}
+					items.push order_item
 				end
 				cart = {items: items, total: Order.find(params[:id]).total}
 				render json: {status: 'SUCCESS', message: 'Loaded Order', data: cart}, status: :ok
