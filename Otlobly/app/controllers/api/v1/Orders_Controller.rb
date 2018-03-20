@@ -38,6 +38,7 @@ module Api
 				render json: {status: 'SUCCESS', message: 'Deleted Order', data: order}, status: :ok				
 			end
 
+
 			def update 
 				order = Order.find(params[:id])
 
